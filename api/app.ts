@@ -4,9 +4,7 @@ import { db } from "./db";
 
 const server = new ApolloServer({
   schema,
-  context: () => ({
-    db,
-  }),
+  context: () => ({ db }),
 });
 
 server.listen().then(({ url }) => {
