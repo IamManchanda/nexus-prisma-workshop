@@ -11,6 +11,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "prettier": {
+    "semi": true,
+    "singleQuote": false,
+    "trailingComma": "all"
+  },
   "dependencies": {
     "@nexus/schema": "^0.16.0",
     "apollo-server": "^2.18.2",
