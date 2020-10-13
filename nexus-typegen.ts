@@ -49,7 +49,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createDraft: NexusGenRootTypes['Post']; // Post!
-    publish: NexusGenRootTypes['Post'] | null; // Post
+    publishDraft: NexusGenRootTypes['Post']; // Post!
   }
   Post: { // field return type
     body: string | null; // String
@@ -59,7 +59,7 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     drafts: Array<NexusGenRootTypes['Post'] | null>; // [Post]!
-    posts: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
+    posts: Array<NexusGenRootTypes['Post'] | null>; // [Post]!
   }
 }
 
@@ -69,7 +69,7 @@ export interface NexusGenArgTypes {
       body: string; // String!
       title: string; // String!
     }
-    publish: { // args
+    publishDraft: { // args
       draftId: number; // Int!
     }
   }

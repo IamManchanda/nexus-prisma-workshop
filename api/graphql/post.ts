@@ -14,8 +14,8 @@ export const PostQuery = extendType({
   type: "Query",
   definition(t) {
     t.list.field("drafts", {
-      nullable: false,
       type: "Post",
+      nullable: false,
       resolve(_root, _args, ctx) {
         return ctx.db.posts.filter((p) => p.published === false);
       },
@@ -23,6 +23,7 @@ export const PostQuery = extendType({
 
     t.list.field("posts", {
       type: "Post",
+      nullable: false,
       resolve(_root, _args, ctx) {
         return ctx.db.posts.filter((p) => p.published === true);
       },
@@ -52,8 +53,9 @@ export const PostMutation = extendType({
       },
     });
 
-    t.field("publish", {
+    t.field("publishDraft", {
       type: "Post",
+      nullable: false,
       args: {
         draftId: intArg({ required: true }),
       },
