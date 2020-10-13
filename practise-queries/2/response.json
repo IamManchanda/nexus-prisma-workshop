@@ -1,0 +1,10 @@
+{
+  "data": {
+    "createDraft": {
+      "id": 2,
+      "title": "Harry Manchanda",
+      "body": "Harry is a Full Stack Web Developer and the one who is interested in Microservices & DevOPS",
+      "published": false
+    }
+  }
+}
