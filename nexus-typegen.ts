@@ -3,7 +3,7 @@
  * Do not make changes to this file directly
  */
 
-
+import * as ContextModule from "./api/context"
 
 
 
@@ -78,7 +78,7 @@ export type NexusGenScalarNames = "Boolean" | "Float" | "ID" | "Int" | "String";
 export type NexusGenUnionNames = never;
 
 export interface NexusGenTypes {
-  context: any;
+  context: ContextModule.Context;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
   argTypes: NexusGenArgTypes;
