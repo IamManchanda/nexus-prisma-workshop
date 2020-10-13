@@ -1,4 +1,4 @@
-mutation publishSingleDraft {
+mutation publishDraft {
   publishDraft(id: 1) {
     id
     title
