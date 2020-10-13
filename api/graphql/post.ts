@@ -57,12 +57,12 @@ export const PostMutation = extendType({
       type: "Post",
       nullable: false,
       args: {
-        draftId: intArg({ required: true }),
+        id: intArg({ required: true }),
       },
       resolve(_root, args, ctx) {
-        let draftToPublish = ctx.db.posts.find((p) => p.id === args.draftId);
+        let draftToPublish = ctx.db.posts.find((p) => p.id === args.id);
         if (!draftToPublish) {
-          throw new Error("Could not find draft with id " + args.draftId);
+          throw new Error("Could not find draft with id " + args.id);
         }
         draftToPublish.published = true;
         return draftToPublish;

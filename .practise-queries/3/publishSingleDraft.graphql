@@ -1,5 +1,5 @@
 mutation publishSingleDraft {
-  publishDraft(draftId: 1) {
+  publishDraft(id: 1) {
     id
     title
     body

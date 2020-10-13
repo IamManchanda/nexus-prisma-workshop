@@ -70,7 +70,7 @@ export interface NexusGenArgTypes {
       title: string; // String!
     }
     publishDraft: { // args
-      draftId: number; // Int!
+      id: number; // Int!
     }
   }
 }
