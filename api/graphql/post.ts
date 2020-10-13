@@ -1,4 +1,5 @@
 import { extendType, intArg, objectType, stringArg } from "@nexus/schema";
+import { Post as PostType } from "../db";
 
 export const Post = objectType({
   name: "Post",
@@ -17,7 +18,7 @@ export const PostQuery = extendType({
       type: "Post",
       nullable: false,
       resolve(_root, _args, ctx) {
-        return ctx.db.posts.filter((p) => p.published === false);
+        return ctx.db.posts.filter((p: PostType) => p.published === false);
       },
     });
 
@@ -25,7 +26,7 @@ export const PostQuery = extendType({
       type: "Post",
       nullable: false,
       resolve(_root, _args, ctx) {
-        return ctx.db.posts.filter((p) => p.published === true);
+        return ctx.db.posts.filter((p: PostType) => p.published === true);
       },
     });
   },
@@ -60,7 +61,9 @@ export const PostMutation = extendType({
         id: intArg({ required: true }),
       },
       resolve(_root, args, ctx) {
-        let draftToPublish = ctx.db.posts.find((p) => p.id === args.id);
+        let draftToPublish = ctx.db.posts.find(
+          (p: PostType) => p.id === args.id,
+        );
         if (!draftToPublish) {
           throw new Error(`Could not find draft with id: ${args.id}`);
         }

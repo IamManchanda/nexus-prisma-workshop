@@ -10,12 +10,5 @@ export interface Db {
 }
 
 export const db: Db = {
-  posts: [
-    {
-      id: 1,
-      title: "Nexus",
-      body: "Nexus was the first web browser and editor.",
-      published: false,
-    },
-  ],
+  posts: [],
 };

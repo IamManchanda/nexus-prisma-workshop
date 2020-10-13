@@ -6,11 +6,24 @@
   "scripts": {
     "dev": "ts-node-dev --transpile-only --no-notify api/app.ts",
     "build": "tsc",
-    "lint": "npx prettier --write './**/*.{ts,md}'"
+    "lint": "npx prettier --write './**/*.{ts,md}'",
+    "generate": "ts-node-dev api/schema.ts",
+    "test": "npm run generate && jest --detectOpenHandles"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "jest": {
+    "preset": "ts-jest",
+    "globals": {
+      "ts-jest": {
+        "diagnostics": {
+          "warnOnly": true
+        }
+      }
+    },
+    "testEnvironment": "node"
+  },
   "prettier": {
     "semi": true,
     "singleQuote": false,
@@ -18,11 +31,18 @@
   },
   "dependencies": {
     "@nexus/schema": "^0.16.0",
+    "@prisma/client": "^2.8.1",
     "apollo-server": "^2.18.2",
+    "get-port": "^5.1.1",
     "graphql": "^15.3.0"
   },
   "devDependencies": {
+    "@prisma/cli": "^2.8.1",
+    "@types/jest": "^26.0.14",
+    "graphql-request": "^3.1.0",
+    "jest": "^26.5.3",
     "prettier": "^2.1.2",
+    "ts-jest": "^26.4.1",
     "ts-node-dev": "^1.0.0-pre.63",
     "typescript": "^4.0.3"
   }
