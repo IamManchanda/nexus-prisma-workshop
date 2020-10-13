@@ -1,8 +1,8 @@
 import { createTestContext } from "./__helpers";
 const ctx = createTestContext();
 
-it("ensures that a draft can be created and published", async () => {
-  const draftResult = await ctx.client.request(`
+it("ensures that a draft can be created and published as a post", async () => {
+  const createDraftResult = await ctx.client.request(`
     mutation createDraft {
       createDraft(title: "Nexus", body: "...") {
         id
@@ -12,7 +12,7 @@ it("ensures that a draft can be created and published", async () => {
       }
     }
   `);
-  expect(draftResult).toMatchInlineSnapshot(`
+  expect(createDraftResult).toMatchInlineSnapshot(`
     Object {
       "createDraft": Object {
         "body": "...",
@@ -23,7 +23,30 @@ it("ensures that a draft can be created and published", async () => {
     }
   `);
 
-  const publishResult = await ctx.client.request(
+  const fetchDraftsResult = await ctx.client.request(`
+    query fetchDrafts {
+      drafts {
+        id
+        title
+        body
+        published
+      }
+    }
+  `);
+  expect(fetchDraftsResult).toMatchInlineSnapshot(`
+    Object {
+      "drafts": Array [
+        Object {
+          "body": "...",
+          "id": 1,
+          "published": false,
+          "title": "Nexus",
+        },
+      ],
+    }
+  `);
+
+  const publishDraftResult = await ctx.client.request(
     `
     mutation publishDraft($id: Int!) {
       publishDraft(id: $id) {
@@ -35,10 +58,10 @@ it("ensures that a draft can be created and published", async () => {
     }
   `,
     {
-      id: draftResult.createDraft.id,
+      id: createDraftResult.createDraft.id,
     },
   );
-  expect(publishResult).toMatchInlineSnapshot(`
+  expect(publishDraftResult).toMatchInlineSnapshot(`
     Object {
       "publishDraft": Object {
         "body": "...",
@@ -46,6 +69,46 @@ it("ensures that a draft can be created and published", async () => {
         "published": true,
         "title": "Nexus",
       },
+    }
+  `);
+
+  const fetchPostsResult = await ctx.client.request(`
+    query fetchPosts {
+      posts {
+        id
+        title
+        body
+        published
+      }
+    }
+  `);
+  expect(fetchPostsResult).toMatchInlineSnapshot(`
+    Object {
+      "posts": Array [
+        Object {
+          "body": "...",
+          "id": 1,
+          "published": true,
+          "title": "Nexus",
+        },
+      ],
+    }
+  `);
+
+  const fetchDraftsResultAgain = await ctx.client.request(`
+    query fetchDrafts {
+      drafts {
+        id
+        title
+        body
+        published
+      }
+    }
+  `);
+
+  expect(fetchDraftsResultAgain).toMatchInlineSnapshot(`
+    Object {
+      "drafts": Array [],
     }
   `);
 });
